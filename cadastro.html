@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style/custom.css">
+    <link rel="stylesheet" href="style/cadastro.css">
+    <title>SPORT+ - Cadastro</title>
+</head>
+<body>
+    <header>
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="./index.html"><img src="./images/logo2.png" alt="logo" height="70" width="250"></a>
+                        
+                </div>
+                <div class="col">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item"><a class="nav-link active" href="./index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./sobre">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./noticias.html">Notícias</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./cadastro.html">Cadastre-se</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./login.html">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./planos.html">Planos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <div class="box">
+            <div class="img-box">
+                <img src="./images/13.jpg">
+            </div>
+            <div class="form-box">
+                <h2>Criar Conta</h2>
+                <p> Já é um membro? <a href="#"> Login </a> </p>
+                <form action="#">
+                    <div class="input-group">
+                        <label for="nome"> Nome Completo</label>
+                        <input type="text" id="nome" placeholder="Digite o seu nome completo" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="Digite o seu email" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" placeholder="Digite o seu telefone" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="tipo_plano">Tipo de Plano:</label>
+                        <select id="tipo_plano" name="tipo_plano" required>
+                            <option value="prata">Prata</option>
+                            <option value="ouro">Ouro</option>
+                            <option value="exclusive">Exclusive</option>
+                        </select>
+                    </div>
+    
+                    <div class="input-group w50">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Digite sua senha" required>
+                    </div>
+    
+                    <div class="input-group w50">
+                        <label for="Confirmarsenha">Confirmar Senha</label>
+                        <input type="password" id="Confirmarsenha" placeholder="Confirme a senha" required>
+                    </div>
+    
+                    <div class="input-group">
+                        <button>Cadastrar</button>
+                    </div>
+
+                    <script>
+                        document.getElementById("cadastroForm").addEventListener("submit", async function(event) {
+                            event.preventDefault();
+                            
+                            const formData = new FormData(event.target);
+                            const data = {};
+                            formData.forEach((value, key) => {
+                                data[key] = value;
+                            });
+                
+                            const response = await fetch("/cadastrar", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(data)
+                            });
+                
+                            const result = await response.json();
+                            if (result.success) {
+                                alert("Cadastro bem-sucedido!");
+                            } else {
+                                alert("Erro ao cadastrar. Tente novamente.");
+                            }
+                        });
+                    </script>
+                    
+
+                </form>
+            </div>
+        </div>
+    </body>
+    <footer>Desenvolvido por: Thales Bernardino</footer>
+    </html>
